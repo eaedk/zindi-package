@@ -9,6 +9,7 @@ import pandas as pd
 def download(url="https://", filename="", headers=''):
 
     response = requests.post(url, headers=headers, stream=True)
+    response.raise_for_status() # check if there is no error
     total = int(response.headers.get('content-length', 0))
     with open(filename, 'wb') as file, tqdm(
             desc=filename,
@@ -26,22 +27,20 @@ def download(url="https://", filename="", headers=''):
 ### Challenges
 def print_challenges(challenges_data):
 
+    n_challenges = challenges_data.shape[0] # total count of retreived challenges
     print("_"*130 )
     print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "" , "" , "", "" , "" ,  ))
     print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "index" , "challenge" , "problem", "reward" , "id" ,  ))
     print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "" , "" , "", "" , "" ,  ))
-
-    n_challenges = challenges_data.shape[0]
-
+    # for data in challenges_data:
     for i in range(n_challenges):
-        data = dict(challenges_data.iloc[i])
-        reward = data['reward']
-        id = data['id']
-        problem = '' if  len(data['type_of_problem'])==0 else data['type_of_problem'][0]
-        kind = "Hack" if data['kind'] == "hackathon" else "Compet"
-        visibility = 'Public' if not data['secret_code_required'] else 'Private'
-        challenge = f"{visibility} {kind}"
-        
+        data = dict(challenges_data.iloc[i]) # data - each challenge, one after another
+        reward = data['reward'] # Challenge's reward for top challengers
+        id = data['id'] # Challenge's id
+        problem = '' if  len(data['type_of_problem'])==0 else data['type_of_problem'][0] # category of the challenge's problem
+        kind = "Hack" if data['kind'] == "hackathon" else "Compet"  # simple challenge's kind
+        visibility = 'Public' if not data['secret_code_required'] else 'Private' # Challenge's visibility
+        challenge = f"{visibility} {kind}" # general challenge's kind - join visibility & kind 
         print("-"*130 )
         print ('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( i , challenge , problem , reward , id ,  ))
     print(f'{"_"*130}\n\n' )   
@@ -54,23 +53,20 @@ def print_lb(challengers_data, my_rank):
     print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "" , "" , "", "" ,"" ,  ))
     print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "rank" , "score" , "name", "counter", "last_submission" ,  ))
     print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "" , "" , "", "" ,"" ,  ))
-
-
     # for data in challengers_data:
     for i in range(len(challengers_data)):
-        data = challengers_data[i]
+        data = challengers_data[i] # data - each row of the leaderboard
         try:
-            score = data['best_private_score'] if "best_private_score" in data else data['best_public_score']
-            rank = data['private_rank'] if "private_rank" in data else data['public_rank']
-            name = data['user']['username'] if "user" in data else f"TEAM - {data['team']['title']}"
+            score = data['best_private_score'] if "best_private_score" in data else data['best_public_score'] # Best submission's score
+            rank = data['private_rank'] if "private_rank" in data else data['public_rank'] # Rank on leaderboard
+            name = data['user']['username'] if "user" in data else f"TEAM - {data['team']['title']}" # Name of user or team
             n_submission = data['submission_count']
             last_submission = data['best_private_submitted_at'] if "best_private_submitted_at" in data else data['best_public_submitted_at']
-            
             check = str(last_submission)==str(None) # conditioin to set last_submission value
             last_submission = '' if check==True else pd.to_datetime(str(last_submission)).strftime("%d %B %Y, %H:%M")
-
+            # Check rank to exclude not yet active challengers
             if rank != None: 
-                if rank == my_rank:
+                if rank == my_rank:# Check rank to mark my position on the leaderboard
                     name += "🟢"
                 print("-"*130 )
                 print('|{:^6}|{:^20}|{:^44.44}|{:^12}|{:^12}'.format( str(rank) , str(score) , str(name) , str(n_submission), str(last_submission) ,  ))
@@ -90,18 +86,18 @@ def print_submission_board(submissions_data):
     print('|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}'.format( "" , "" , "", "" ,"" , "" ,  ))
 
     for data in submissions_data:
-        filename = data['filename']
-        date = pd.to_datetime(data['created_at'] ).strftime("%d %b %Y, %H:%M")
-        id = data['id']
+        filename = data['filename'] # Submission's filename
+        date = pd.to_datetime(data['created_at'] ).strftime("%d %b %Y, %H:%M") # Date of submission
+        id = data['id'] # submission's id
         
         if data["status"] == "successful": 
-            status = "🟢"
-            score = data['private_score'] if "private_score" in data else data['public_score']
-            comment = data['comment'] 
+            status = "🟢" # Status - for valid of the submission
+            score = data['private_score'] if "private_score" in data else data['public_score'] # Score of the submission
+            comment = data['comment'] # Comment of the submission
         else:
-            score = "-"
-            status = "🔴"
-            comment = data['status_description']
+            score = "-" # Score of the submission : "-" for wrong submission
+            status = "🔴" # Status - for wrong of the submission
+            comment = data['status_description'] # Submission error description
         print("-"*130 )
         print('|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}'.format( status , id , date, str(score) , filename, comment ,  ))
     print(f'{"_"*130}\n\n' )  
@@ -112,9 +108,9 @@ def join_challenge( url, headers, ):
 
     response = requests.post( url, headers=headers )
     response = response.json()['data']
-    try:
+    try: # raise error if request failed
         print(f"\n[ 🔴 ] {response['errors']}\n")
-    except:
+    except: # else print success message
         print(f"\n[ 🟢 ] {response}\n")
 
 
@@ -134,9 +130,9 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
     # request
     response = requests.get( url, headers=headers , params=sorting_params)
     response = response.json()["data"]
-    try: 
+    try: # raise error if request failed
         print( response["errors"] )
-    except:
+    except: # else go on in processing
         challenges_data = pd.DataFrame(response)
         # extract relevant columns and print the recap table
         challenges_data = challenges_data[to_show_challenge_data]
@@ -148,6 +144,7 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 def participations(challenge_id, headers):
     url = "https://api.zindi.africa/v1/participations"
     response = requests.get( url, headers=headers )
+    response.raise_for_status() # check if there is no error
     response = response.json()["data"]
     team_id = response[challenge_id]['team_id']
     return team_id
@@ -155,19 +152,20 @@ def participations(challenge_id, headers):
 
 ## Info about user position on lb 
 def me_on_leaderboard(challengers_data, challenge_id, username, headers):
-    df_lb = pd.DataFrame(challengers_data)
-    my_rank_on_lb = -1
-    df_lb = df_lb[ (df_lb.public_rank != None) ] # filter to use only on leaderboard challengers
-    team_id = participations(challenge_id=challenge_id, headers=headers)
-    # Simple user
-    if  not team_id:
-        user = df_lb[df_lb['user'].astype(str).str.contains( username,)] # na=False, case=True, regex=False
-        my_index_on_lb = user.index.values[0].astype(int)
-    # Team
-    else :
-        my_team = df_lb[df_lb['team'].astype(str).str.contains(team_id,)]
-        my_index_on_lb = my_team.index.values[0].astype(int)
+    df_lb = pd.DataFrame(challengers_data) # DataFrame verion of the leaderboard
+    df_lb = df_lb[ (df_lb.public_rank != None) ] # filter to use only leaderboard part with the active challengers
+    try:
+        team_id = participations(challenge_id=challenge_id, headers=headers)
+        # Simple user
+        if  not team_id:
+            user = df_lb[df_lb['user'].astype(str).str.contains( username,)] # na=False, case=True, regex=False
+            user_index = user.index.values[0].astype(int)
+        # Team
+        else :
+            my_team = df_lb[df_lb['team'].astype(str).str.contains(team_id,)]
+            user_index = my_team.index.values[0].astype(int)
+        user_rank = user_index + 1
+    except:
+        user_rank = 0 # rank initialization for not yet active challengers
 
-    my_rank_on_lb = my_index_on_lb + 1
-
-    return my_rank_on_lb
+    return user_rank
