@@ -151,7 +151,7 @@ class Zindian:
             except:
                 challengers_data = response
                 self.challengers_data = response
-                self.__rank = me_on_leaderboard(challengers_data, challenge_id=self.__challenge_data['id'], username=self.__auth_data['user']['username'], headers=headers)
+                self.__rank = user_on_lb(challengers_data, challenge_id=self.__challenge_data['id'], username=self.__auth_data['user']['username'], headers=headers)
                 if to_print:
                     print_lb(challengers_data=challengers_data, my_rank=self.__rank)
         else:

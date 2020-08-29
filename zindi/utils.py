@@ -151,7 +151,7 @@ def participations(challenge_id, headers):
 
 
 ## Info about user position on lb 
-def me_on_leaderboard(challengers_data, challenge_id, username, headers):
+def user_on_lb(challengers_data, challenge_id, username, headers):
     df_lb = pd.DataFrame(challengers_data) # DataFrame verion of the leaderboard
     df_lb = df_lb[ (df_lb.public_rank != None) ] # filter to use only leaderboard part with the active challengers
     try:
