@@ -1,4 +1,6 @@
 import sys, os
+
+## To avoid errors of importing before instalation
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
@@ -12,13 +14,13 @@ user.which_challenge
 
 user.select_a_challenge()
 
-user.which_challenge
+# user.which_challenge
 
-user.leaderboard()
+# user.leaderboard()
 
-user.my_rank
+# user.my_rank
 
-user.download_dataset(destination="tests/dataset")
+# user.download_dataset(destination="tests/dataset")
 
 user.submit(filepaths=['tests/dataset/SampleSubmission.csv'])
 

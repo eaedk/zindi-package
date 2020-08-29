@@ -1,6 +1,8 @@
 # Imports
 
 import sys, os
+
+## To avoid errors of importing before instalation
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
@@ -181,7 +183,6 @@ class Zindian:
             try:
                 print(f"\n[ 🔴 ] {response['errors']}\n")
             except:
-                    # print(f"\n[ 🟢 ] {response}\n")
                 print_submission_board(submissions_data=response)
         else:
             print(f"\n[ 🔴 ] You have to select a challenge before to get the submission-board,\nuse the select_a_challenge method.\n")

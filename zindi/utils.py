@@ -93,6 +93,7 @@ def print_submission_board(submissions_data):
         if data["status"] == "successful": 
             status = "🟢" # Status - for valid of the submission
             score = data['private_score'] if "private_score" in data else data['public_score'] # Score of the submission
+            score = "In processing" if score == None else score # Show a message when processing of the score is not yet finished
             comment = data['comment'] # Comment of the submission
         else:
             score = "-" # Score of the submission : "-" for wrong submission
