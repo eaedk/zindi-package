@@ -21,8 +21,8 @@ class Zindian:
             msg = f"[ 🟢 ] You are currently participate in : {self.__challenge_data['id']} challenge,\n{self.__challenge_data['subtitle']}." 
         else:
             msg = f"[ 🔴 ] You have not yet selected any challenge."
-        
         print(msg)
+        return self.__challenge_data['id']
 
     @property
     def my_rank(self,):
@@ -39,12 +39,11 @@ class Zindian:
                 rank = f"{int_rank}rd"
             else:
                 rank = f"{int_rank}th"
-
             msg = f"[ 🟢 ] You are {rank} on the leaderboad of {self.__challenge_data['id']} challenge, Go on..." 
         else:
             msg = f"[ 🔴 ] You have not yet selected any challenge."
-        
         print(msg)
+        return int_rank
 
 # Account
 ## Sign In
