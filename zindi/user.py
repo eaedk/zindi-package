@@ -152,7 +152,7 @@ class Zindian:
                 self.challengers_data = response
                 self.__rank = user_on_lb(challengers_data, challenge_id=self.__challenge_data['id'], username=self.__auth_data['user']['username'], headers=headers)
                 if to_print:
-                    print_lb(challengers_data=challengers_data, my_rank=self.__rank)
+                    print_lb(challengers_data=challengers_data, user_rank=self.__rank)
         else:
             print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
     
