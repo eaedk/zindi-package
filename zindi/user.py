@@ -1,6 +1,11 @@
 # Imports
+
+import sys, os
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
 from zindi.utils import *
-import os
 from getpass import getpass
 
 import pandas as pd
@@ -22,10 +27,13 @@ class Zindian:
     def which_challenge(self,):
         if self.__challenge_selected:
             msg = f"[ 🟢 ] You are currently participate in : {self.__challenge_data['id']} challenge,\n{self.__challenge_data['subtitle']}." 
+            challenge = self.__challenge_data['id']
+
         else:
             msg = f"[ 🔴 ] You have not yet selected any challenge."
+            challenge = None
         print(msg)
-        return self.__challenge_data['id']
+        return challenge
 
     @property
     def my_rank(self,):
@@ -105,7 +113,7 @@ class Zindian:
                 for data in datafiles]
                 
             else:
-                print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method before.\n")
+                print(f"\n[ 🔴 ] You have to select a challenge before to downoad a dataset,\nuse the select_a_challenge method before.\n")
         else:
             print(f"\n[ 🔴 ] You have to choose a correct destination's path for the dataset.\n")
 
@@ -134,7 +142,7 @@ class Zindian:
                 else:
                     print(f"\n[ 🔴 ] Submission file must be a CSV file ( .csv ), please verify this filepath : {filepath}\n")
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to push any submission file,\nuse the select_a_challenge method.\n")
 
 ## Show leaderboard
     def leaderboard(self, to_print=True):
@@ -157,7 +165,7 @@ class Zindian:
                 if to_print:
                     print_lb(challengers_data=challengers_data, user_rank=self.__rank)
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to get the leaderboard,\nuse the select_a_challenge method.\n")
     
 ## Show Submission-board
 
@@ -176,7 +184,7 @@ class Zindian:
                     # print(f"\n[ 🟢 ] {response}\n")
                 print_submission_board(submissions_data=response)
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to get the submission-board,\nuse the select_a_challenge method.\n")
 
 
 # Team
@@ -195,7 +203,7 @@ class Zindian:
             except:
                 print(f"\n[ 🟢 ] {response}\n")
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to manage your team,\nuse the select_a_challenge method.\n")
 
 ## Team Up
     def team_up(self, zindians=[]):
@@ -213,7 +221,7 @@ class Zindian:
                 except:
                     print(f"\n[ 🟢 ] {response}\n")
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to manage your team,\nuse the select_a_challenge method.\n")
 
 ## Disband
     def disband_team(self, ):
@@ -229,4 +237,4 @@ class Zindian:
             except:
                 print(f"\n[ 🟢 ] {response}\n")
         else:
-            print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
+            print(f"\n[ 🔴 ] You have to select a challenge before to manage your team,\nuse the select_a_challenge method.\n")
