@@ -36,13 +36,13 @@ def print_challenges(challenges_data):
     for i in range(n_challenges):
         data = dict(challenges_data.iloc[i]) # data - each challenge, one after another
         reward = data['reward'] # Challenge's reward for top challengers
-        id = data['id'] # Challenge's id
+        id = data['id'][:50]+"..." # Challenge's id
         problem = '' if  len(data['type_of_problem'])==0 else data['type_of_problem'][0] # category of the challenge's problem
         kind = "Hack" if data['kind'] == "hackathon" else "Compet"  # simple challenge's kind
         visibility = 'Public' if not data['secret_code_required'] else 'Private' # Challenge's visibility
         challenge = f"{visibility} {kind}" # general challenge's kind - join visibility & kind 
         print("-"*130 )
-        print ('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( i , challenge , problem , reward , id ,  ))
+        print ('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}|'.format( i , challenge , problem , reward , id ,  ))
     print(f'{"_"*130}\n\n' )   
 
 ## Print

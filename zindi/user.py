@@ -66,18 +66,22 @@ class Zindian:
         password = getpass(prompt='Your password\n>> ')
         data = {"username": username, "password": password }
 
-        ## FOR TEST
-        #USERNAME, PASSWORD = "eaedk", getpass("password : ")
-        #data = {"username": USERNAME, "password": PASSWORD }
 
         response = requests.post( url, data=data , headers=self.__headers )
         response = response.json()["data"]
         try: 
             print( f'[ 🔴 ] {response["errors"]}' )
         except:
-            print( f"[ 🟢 ] 👋🏾👋🏾 Welcome {response['user']['username'] } 👋🏾👋🏾" )
+            print( f"[ 🟢 ] 👋🏾👋🏾 Welcome {response['user']['username'] } 👋🏾👋🏾\n" )
+
+            headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
+            challenges_url = "https://api.zindi.africa/v1/competitions" 
+            challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=challenges_url, headers=headers )
+            print("[INFO] Here are the available challenges ...\n")
+            print_challenges( challenges_data=challenges_data )
             self.__auth_data = response
-            
+
+
 # Challenge
 ## Select a challenge to participate in
     def select_a_challenge(self, reward='all', kind='all', active='all',):
