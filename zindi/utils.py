@@ -125,29 +125,20 @@ def join_challenge( url, headers, ):
 ## Show available challenges
 
 
-def get_challenges(reward='', kind='', active='', url='', headers='' ):
+def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
     to_show_challenge_data = ["id","kind",  "subtitle", "reward", "type_of_problem", "data_type", "secret_code_required", "sealed"]
-    challenges_data = False
+    challenges_data = pd.DataFrame()
     
     # check validity of challenge sorting's values
-    # kind='competition' -- 'hackathon', active=1 , reward='prize' --'knowledge' --'points'
-    if reward not in ['', 'prize', 'points', 'knowledge' ]:
-        reward = ''
-
-    if kind in ['', 'competition', 'hackathon']:
-        kind = ''
-        
-    if active in ['', True, False]:
-        active = '' if active=='' else int(active)
-    else:
-        active = ''
-
-    sorting_params = dict(page=0, per_page=200, reward=reward, kind=kind )
+    reward = '' if reward.lower() not in ['prize', 'points', 'knowledge' ] else reward.lower()
+    kind = '' if kind.lower() not in ['competition', 'hackathon'] else kind.lower()
+    active = '' if active.lower() not in [True, False] else int(active)
+    # join sorting params in a dictionary which will be passed in the url
+    sorting_params = dict(page=0, per_page=200, reward=reward, kind=kind, active=active )
     
     # request
     response = requests.get( url, headers=headers , params=sorting_params)
-    # response.raise_for_status()
     response = response.json()["data"]
     try: 
         print( response["errors"] )
@@ -156,7 +147,6 @@ def get_challenges(reward='', kind='', active='', url='', headers='' ):
         # extract relevant columns and print the recap table
         challenges_data = challenges_data[to_show_challenge_data]
         print_challenges( challenges_data )
-    
     return challenges_data
 
 
