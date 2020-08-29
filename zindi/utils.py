@@ -20,10 +20,10 @@ def download(url="https://", filename="", headers=''):
         for data in response.iter_content(chunk_size=1024):
             size = file.write(data)
             bar.update(size)
-    # return total 
+
 
 ## Print
-
+### Challenges
 def print_challenges(challenges_data):
 
     print("_"*130 )
@@ -33,7 +33,7 @@ def print_challenges(challenges_data):
 
     n_challenges = challenges_data.shape[0]
 
-    for i  in range(n_challenges):
+    for i in range(n_challenges):
         data = dict(challenges_data.iloc[i])
         reward = data['reward']
         id = data['id']
@@ -46,7 +46,8 @@ def print_challenges(challenges_data):
         print ('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( i , challenge , problem , reward , id ,  ))
     print(f'{"_"*130}\n\n' )   
 
-
+## Print
+### Leaderboard
 def print_lb(challengers_data, my_rank):
 
     print("_"*130 )
@@ -75,13 +76,12 @@ def print_lb(challengers_data, my_rank):
                 print('|{:^6}|{:^20}|{:^44.44}|{:^12}|{:^12}'.format( str(rank) , str(score) , str(name) , str(n_submission), str(last_submission) ,  ))
             else:
                 break # all the next zindians haven't made a correct submission yet
-
         except Exception as e:
             print(e)
-            
     print(f'{"_"*130}\n\n' )  
 
-
+## Print
+### Submission-board
 def print_submission_board(submissions_data):
 
     print("_"*130 )
@@ -102,16 +102,12 @@ def print_submission_board(submissions_data):
             score = "-"
             status = "🔴"
             comment = data['status_description']
-            
         print("-"*130 )
         print('|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}'.format( status , id , date, str(score) , filename, comment ,  ))
-        
     print(f'{"_"*130}\n\n' )  
 
+
 ## Join challenge
-
-
-
 def join_challenge( url, headers, ):
 
     response = requests.post( url, headers=headers )
@@ -123,8 +119,6 @@ def join_challenge( url, headers, ):
 
 
 ## Show available challenges
-
-
 def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
     to_show_challenge_data = ["id","kind",  "subtitle", "reward", "type_of_problem", "data_type", "secret_code_required", "sealed"]
@@ -151,25 +145,20 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
 
 ##  Info about the challenges user participate in
-
-
-def participations(headers, challenge_id ):
+def participations(challenge_id, headers):
     url = "https://api.zindi.africa/v1/participations"
     response = requests.get( url, headers=headers )
     response = response.json()["data"]
     team_id = response[challenge_id]['team_id']
     return team_id
 
+
 ## Info about user position on lb 
-
-
 def me_on_leaderboard(challengers_data, challenge_id, username, headers):
     df_lb = pd.DataFrame(challengers_data)
     my_rank_on_lb = -1
     df_lb = df_lb[ (df_lb.public_rank != None) ] # filter to use only on leaderboard challengers
-
     team_id = participations(challenge_id=challenge_id, headers=headers)
-
     # Simple user
     if  not team_id:
         user = df_lb[df_lb['user'].astype(str).str.contains( username,)] # na=False, case=True, regex=False
