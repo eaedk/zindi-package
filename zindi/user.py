@@ -1,9 +1,12 @@
 # Imports
 from zindi.utils import *
-from getpass import getpass 
-import os, requests
-from tqdm import tqdm
+import os
+from getpass import getpass
+
 import pandas as pd
+import requests
+from tqdm import tqdm
+
 
 # Class declaration and init
 class Zindian:
@@ -227,4 +230,3 @@ class Zindian:
                 print(f"\n[ 🟢 ] {response}\n")
         else:
             print(f"\n[ 🔴 ] You have to select a challenge,\nuse the select_a_challenge method.\n")
-
