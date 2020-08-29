@@ -28,7 +28,7 @@ class Zindian:
     @property
     def which_challenge(self,):
         if self.__challenge_selected:
-            msg = f"[ 🟢 ] You are currently participate in : {self.__challenge_data['id']} challenge,\n{self.__challenge_data['subtitle']}." 
+            msg = f"[ 🟢 ] You are currently enrolled in : {self.__challenge_data['id']} challenge,\n{self.__challenge_data['subtitle']}." 
             challenge = self.__challenge_data['id']
 
         else:
@@ -63,12 +63,12 @@ class Zindian:
     def __signin(self, username ):
         
         url = "https://api.zindi.africa/v1/auth/signin"
-        # password = getpass(prompt='Your password\n>> ')
-        # data = {"username": username, "password": password }
+        password = getpass(prompt='Your password\n>> ')
+        data = {"username": username, "password": password }
 
         ## FOR TEST
-        USERNAME, PASSWORD = "eaedk", "Eaedk.01021999"
-        data = {"username": USERNAME, "password": PASSWORD }
+        #USERNAME, PASSWORD = "eaedk", getpass("password : ")
+        #data = {"username": USERNAME, "password": PASSWORD }
 
         response = requests.post( url, data=data , headers=self.__headers )
         response = response.json()["data"]
