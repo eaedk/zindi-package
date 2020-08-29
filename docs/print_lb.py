@@ -1,5 +1,5 @@
 def print_lb(challengers_data, my_rank):
-    """Formated print the Zindi's challenge leaderboad as table.
+    """Formated print the Zindi's challenge leaderboard as table.
 
     Parameters
     ----------
