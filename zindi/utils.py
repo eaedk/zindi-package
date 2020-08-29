@@ -47,7 +47,7 @@ def print_challenges(challenges_data):
 
 ## Print
 ### Leaderboard
-def print_lb(challengers_data, my_rank):
+def print_lb(challengers_data, user_rank):
 
     print("_"*130 )
     print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "" , "" , "", "" ,"" ,  ))
@@ -66,7 +66,7 @@ def print_lb(challengers_data, my_rank):
             last_submission = '' if check==True else pd.to_datetime(str(last_submission)).strftime("%d %B %Y, %H:%M")
             # Check rank to exclude not yet active challengers
             if rank != None: 
-                if rank == my_rank:# Check rank to mark my position on the leaderboard
+                if rank == user_rank:# Check rank to mark my position on the leaderboard
                     name += "🟢"
                 print("-"*130 )
                 print('|{:^6}|{:^20}|{:^44.44}|{:^12}|{:^12}'.format( str(rank) , str(score) , str(name) , str(n_submission), str(last_submission) ,  ))
@@ -166,6 +166,5 @@ def user_on_lb(challengers_data, challenge_id, username, headers):
             user_index = my_team.index.values[0].astype(int)
         user_rank = user_index + 1
     except:
-        user_rank = 0 # rank initialization for not yet active challengers
-
+        user_rank = 0 # rank initialization if user is not yet active for the challenge
     return user_rank
