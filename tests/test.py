@@ -13,7 +13,7 @@ user.leaderboard()
 
 user.my_rank
 
-user.download_dataset(destination=".")
+user.download_dataset(destination="dataset")
 
 # user.submit(filepaths=['sample_data/california_housing_test.csv'])
 
