@@ -11,6 +11,8 @@ from zindi.user import Zindian
 my_username = "I_am_Zeus_AI"
 user = Zindian(username = my_username)
 
+#desired output 
+[ 🟢 ] 👋🏾👋🏾 Welcome I_am_Zeus_AI 👋🏾👋🏾
 
 # get current challenge info if seleted
 user.which_challenge
