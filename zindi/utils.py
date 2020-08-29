@@ -125,7 +125,7 @@ def join_challenge( url, headers, ):
 ## Show available challenges
 
 
-def show_challenges(reward='', kind='', active='', url='', headers='' ):
+def get_challenges(reward='', kind='', active='', url='', headers='' ):
 
     to_show_challenge_data = ["id","kind",  "subtitle", "reward", "type_of_problem", "data_type", "secret_code_required", "sealed"]
     challenges_data = False
