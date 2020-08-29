@@ -9,3 +9,4 @@ def download(url='https://', filename='', headers=''):
         The local filename of the file to download.
     headers : dictionnary
         The headers of the download's request.
+    """
