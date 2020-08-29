@@ -4,5 +4,5 @@ def print_challenges(challenges_data):
     Parameters
     ----------
     challenges_data : dictionary | json
-        The json's reponse of the request to get informations about the challenges.
+        The json's response of the request to get informations about the challenges.
     """
