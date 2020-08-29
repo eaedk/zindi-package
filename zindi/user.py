@@ -16,7 +16,7 @@ class Zindian:
 
 # Properties
     @property
-    def what_challenge(self,):
+    def which_challenge(self,):
         if self.__challenge_selected:
             msg = f"[ 🟢 ] You are currently participate in : {self.__challenge_data['id']} challenge,\n{self.__challenge_data['subtitle']}." 
         else:

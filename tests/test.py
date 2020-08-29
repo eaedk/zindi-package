@@ -3,11 +3,11 @@ from zindi.user import Zindian
 
 user = Zindian("")
 
-user.what_challenge
+user.which_challenge
 
 user.select_a_challenge(reward='', kind='', active='')
 
-user.what_challenge
+user.which_challenge
 
 user.leaderboard()
 
