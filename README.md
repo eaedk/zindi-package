@@ -5,4 +5,4 @@ A user-friendly ZINDI package which allow Zindians to achieve all available task
 
 
 ## Status
-In progress 🚧 
+In progress 🚧 . Check the progression state in the ` feature.txt ` file.
