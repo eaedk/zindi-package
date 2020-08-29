@@ -12,7 +12,7 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
     url : string
         The url of the selected challenge.
-    headers : dictionnary
+    headers : dictionary
         The headers of the request to participate in a challenge.  
 
     Returns
