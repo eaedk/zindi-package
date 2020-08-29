@@ -20,7 +20,7 @@ def download(url="https://", filename="", headers=''):
         for data in response.iter_content(chunk_size=1024):
             size = file.write(data)
             bar.update(size)
-    return total 
+    # return total 
 
 ## Print
 
