@@ -1,20 +1,23 @@
 def method( arg_1, arg_2, **kwargs):
-    """
-    Description : Description of the method .
+    """Description of the method.
 
-    Arguments :
-    -----------
-    arg_1 : ( type ) -- Default : 1 -- Utility of the argument .
-    arg_2 : ( type ) -- Default : 1 -- Utility of the argument .
-
-    Returns :
-    ---------
-    value_return : ( type ) -- Default : None -- Return value .
-    
+    Parameters
+    ----------
+    X : ndarray of shape (n_samples, n_features)
+        The data array.
+    estimator : object
+        The estimator to use to compute the predictions.
+        
+    Returns
+    -------
+    return_value : ndarray of shape (n_samples, K)
+        The initial raw predictions. K is equal to 1 for binary
+        classification and regression, and equal to the number of classes
+        for multiclass classification.
     """
 
     pass
 
-    value_return = None
+    return_value = None
 
-    return value_return
+    return return_value
