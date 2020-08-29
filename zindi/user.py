@@ -67,7 +67,7 @@ class Zindian:
             
 # Challenge
 ## Select a challenge to participate in
-    def select_a_challenge(self, reward='', kind='', active='',):
+    def select_a_challenge(self, reward='all', kind='all', active='all',):
         
         headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
         url = "https://api.zindi.africa/v1/competitions" 

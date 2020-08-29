@@ -5,7 +5,7 @@ user = Zindian("")
 
 user.which_challenge
 
-user.select_a_challenge(reward='', kind='', active='')
+user.select_a_challenge()
 
 user.which_challenge
 
