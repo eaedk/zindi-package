@@ -72,7 +72,7 @@ class Zindian:
         
         headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
         url = "https://api.zindi.africa/v1/competitions" 
-        challenges_data = show_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
+        challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
 
         while True:
             challenge_index = input("Type index of the challenge you want to participate in.\n>>")
