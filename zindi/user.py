@@ -85,11 +85,12 @@ class Zindian:
         headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
         url = "https://api.zindi.africa/v1/competitions" 
         challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
-
+        print_challenges( challenges_data=challenges_data )
         while True:
-            challenge_index = input("Type index of the challenge you want to participate in.\n>>")
+            # challenge_index = input("Type index of the challenge you want to participate in.\n>>")
             try:
-                challenge_index = int( challenge_index.strip() )
+                # challenge_index = int( challenge_index.strip() )
+                challenge_index = 3
                 self.__challenge_data = challenges_data.iloc[challenge_index]
                 self.__api = f"https://api.zindi.africa/v1/competitions/{self.__challenge_data['id']}"
                 self.__challenge_selected = True
@@ -120,20 +121,23 @@ class Zindian:
             print(f"\n[ 🔴 ] You have to choose a correct destination's path for the dataset.\n")
 
 ## Push submission file
-    def submit(self, filepaths=['file.csv',]):
+    def submit(self, filepaths=[], comments=[]):
 
         if self.__challenge_selected :
             headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
             url = f"{self.__api}/submissions"
             allowed_extensions = [ 'csv', ]
+            if len(comments) < len(filepaths):
+                n_blank_comment = len(filepaths) - len(comments)
+                comments += [""]*n_blank_comment
 
-            for filepath in filepaths:
+            for filepath, comment in zip(filepaths, comments):
                 extension = filepath.split(".")[-1].strip().lower()
                 if extension in allowed_extensions:
                     if os.path.isfile(filepath):
                         file = {"file": open(filepath, 'rb')} # Loading the file to be submitted
-                        
-                        response = requests.post(url, headers=headers, files=file)
+                        data = {"comment": comment}
+                        response = requests.post(url, headers=headers, files=file, data=data,)
                         response = response.json()['data']
                         try:
                             print(f"\n[ 🔴 ] Something wrong with file :{filepath} ,\n{response['errors']}\n")

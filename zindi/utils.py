@@ -137,7 +137,6 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
         challenges_data = pd.DataFrame(response)
         # extract relevant columns and print the recap table
         challenges_data = challenges_data[to_show_challenge_data]
-        print_challenges( challenges_data )
     return challenges_data
 
 
