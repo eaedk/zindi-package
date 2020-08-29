@@ -113,8 +113,6 @@ def print_submission_board(submissions_data):
 
 
 def join_challenge( url, headers, ):
-    # headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
-    # url = f"{self.__api}/participations"
 
     response = requests.post( url, headers=headers )
     response = response.json()['data']
