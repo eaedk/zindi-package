@@ -1,0 +1,1 @@
+def user_on_lb(challengers_data, challenge_id, username, headers):
