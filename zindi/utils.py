@@ -29,9 +29,9 @@ def print_challenges(challenges_data):
 
     n_challenges = challenges_data.shape[0] # total count of retreived challenges
     print("_"*130 )
-    print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "" , "" , "", "" , "" ,  ))
-    print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "index" , "challenge" , "problem", "reward" , "id" ,  ))
-    print('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}'.format( "" , "" , "", "" , "" ,  ))
+    print("|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}".format( "" , "" , "", "" , "" ,  ))
+    print("|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}".format( "index" , "challenge" , "problem", "reward" , "id" ,  ))
+    print("|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}".format( "" , "" , "", "" , "" ,  ))
     # for data in challenges_data:
     for i in range(n_challenges):
         data = dict(challenges_data.iloc[i]) # data - each challenge, one after another
@@ -42,17 +42,17 @@ def print_challenges(challenges_data):
         visibility = 'Public' if not data['secret_code_required'] else 'Private' # Challenge's visibility
         challenge = f"{visibility} {kind}" # general challenge's kind - join visibility & kind 
         print("-"*130 )
-        print ('|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}|'.format( i , challenge , problem , reward , id ,  ))
-    print(f'{"_"*130}\n\n' )   
+        print ("|{:^5}|{:^14}|{:^18.18}|{:^16.16}|{:^10}|".format( i , challenge , problem , reward , id ,  ))
+    print(f"{'_'*130}\n\n" )   
 
 ## Print
 ### Leaderboard
 def print_lb(challengers_data, user_rank):
 
     print("_"*130 )
-    print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "" , "" , "", "" ,"" ,  ))
-    print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "rank" , "score" , "name", "counter", "last_submission" ,  ))
-    print('|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}'.format( "" , "" , "", "" ,"" ,  ))
+    print("|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}".format( "" , "" , "", "" ,"" ,  ))
+    print("|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}".format( "rank" , "score" , "name", "counter", "last_submission" ,  ))
+    print("|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}".format( "" , "" , "", "" ,"" ,  ))
     # for data in challengers_data:
     for i in range(len(challengers_data)):
         data = challengers_data[i] # data - each row of the leaderboard
@@ -69,28 +69,28 @@ def print_lb(challengers_data, user_rank):
                 if rank == user_rank:# Check rank to mark my position on the leaderboard
                     name += "🟢"
                 print("-"*130 )
-                print('|{:^6}|{:^20}|{:^44.44}|{:^12}|{:^12}'.format( str(rank) , str(score) , str(name) , str(n_submission), str(last_submission) ,  ))
+                print("|{:^6}|{:^20}|{:^44.44}|{:^12}|{:^12}".format( str(rank) , str(score) , str(name) , str(n_submission), str(last_submission) ,  ))
             else:
                 break # all the next zindians haven't made a correct submission yet
         except Exception as e:
             print(e)
-    print(f'{"_"*130}\n\n' )  
+    print(f"{'_'*130}\n\n" )  
 
 ## Print
 ### Submission-board
 def print_submission_board(submissions_data):
 
     print("_"*130 )
-    print('|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}'.format( "" , "" , "", "" ,"" , "" ,  ))
-    print('|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}'.format( "status" , "id" , "date", "score", "filename", "comment" ,  ))
-    print('|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}'.format( "" , "" , "", "" ,"" , "" ,  ))
+    print("|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}".format( "" , "" , "", "" ,"" , "" ,  ))
+    print("|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}".format( "status" , "id" , "date", "score", "filename", "comment" ,  ))
+    print("|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}".format( "" , "" , "", "" ,"" , "" ,  ))
 
     for data in submissions_data:
         filename = data['filename'] # Submission's filename
         date = pd.to_datetime(data['created_at'] ).strftime("%d %b %Y, %H:%M") # Date of submission
         id = data['id'] # submission's id
         
-        if data["status"] in ["successful", "initial"]: 
+        if data['status'] in ['successful", "initial']: 
             status = "🟢" # Status - for valid of the submission
             score = data['private_score'] if "private_score" in data else data['public_score'] # Score of the submission
             score = "In processing" if score == None else score # Show a message when processing of the score is not yet finished
@@ -101,10 +101,10 @@ def print_submission_board(submissions_data):
             comment = "" if data['status_description'] == None else data['status_description'] # Submission error description
         print("-"*130 )
         try:
-            print('|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}'.format( status , id , date, str(score) , filename, comment ,  ))
+            print("|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}".format( status , id , date, str(score) , filename, comment ,  ))
         except:
-            print('|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}'.format( status , id , date, "" , filename, "Oop there is an unknown bug, sorry !" ,  ))
-    print(f'{"_"*130}\n\n' ) 
+            print("|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}".format( status , id , date, "" , filename, "Oop there is an unknown bug, sorry !" ,  ))
+    print(f"{'_'*130}\n\n" ) 
 
 
 ## Join challenge
@@ -133,9 +133,9 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
     
     # request
     response = requests.get( url, headers=headers , params=sorting_params)
-    response = response.json()["data"]
+    response = response.json()['data']
     try: # raise error if request failed
-        print( response["errors"] )
+        print( response['errors'] )
     except: # else go on in processing
         challenges_data = pd.DataFrame(response)
         # extract relevant columns and print the recap table
@@ -151,10 +151,13 @@ def challenge_idx_selector(n_challenges):
     while True:
         user_input = input("Type the index of the challenge you want to select or 'q' to exit.\n>>")
         try: # user_input must be a valid integer or 'q' else we stay in the infinite loop
-            challenge_index = int( user_input.strip() )
+            user_input = int( user_input.strip() )
 
-            if (challenge_index >= 0) and (challenge_index < n_challenges):
+            if (user_input >= 0) and (user_input < n_challenges):
+                challenge_index = user_input
                 return challenge_index
+            else:
+                raise Exception()
         except:
             if user_input.lower().strip() == 'q': # to stop selection 
                 return challenge_index 
@@ -166,7 +169,7 @@ def participations(challenge_id, headers):
     url = "https://api.zindi.africa/v1/participations"
     response = requests.get( url, headers=headers )
     response.raise_for_status() # check if there is no error
-    response = response.json()["data"]
+    response = response.json()['data']
     team_id = response[challenge_id]['team_id']
     return team_id
 
