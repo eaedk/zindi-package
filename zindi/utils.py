@@ -5,7 +5,6 @@ import pandas as pd
 # Utils
 
 ## Download a file
-
 def download(url="https://", filename="", headers=''):
     """Download a file with progress bar.
 
