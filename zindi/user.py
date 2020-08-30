@@ -98,10 +98,7 @@ class Zindian:
             try:
                 if isinstance(fixed_index, int) and (fixed_index > -1) :
                     challenge_index = fixed_index
-                    print("alright 'fixed_index' is > -1 ")
-                    if (challenge_index < n_challenges) :
-                        print(f"alright 'fixed_index' is < {n_challenges} ")
-                    else:
+                    if (challenge_index > n_challenges) :
                         raise Exception(error_msg)
                 else:
                     raise Exception(error_msg)
@@ -110,7 +107,7 @@ class Zindian:
                 print(e)
         if challenge_index > -1 :
             self.__challenge_data = challenges_data.iloc[challenge_index]
-            self.__api = f"h{self.__base_api}/{self.__challenge_data['id']}"
+            self.__api = f"{self.__base_api}/{self.__challenge_data['id']}"
             self.__challenge_selected = True
 
             print(f"\n\n[ 🟢 ] You choose the challenge : {self.__challenge_data['id']},\n{self.__challenge_data['subtitle']}.\n")
@@ -153,7 +150,7 @@ class Zindian:
                     if os.path.isfile(filepath):
                         file = {"file": open(filepath, 'rb')} # Loading the file to be submitted
                         data = {"comment": comment}
-                        print(f"[INFO] Submiting file : {filepath}")
+                        print(f"[INFO] Submiting file : {filepath} , wait ...")
                         response = requests.post(url, headers=headers, files=file, data=data,)
                         response = response.json()['data']
                         try:
