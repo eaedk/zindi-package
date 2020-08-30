@@ -7,6 +7,17 @@ import pandas as pd
 ## Download a file
 
 def download(url="https://", filename="", headers=''):
+    """Download a file with progress bar.
+
+    Parameters
+    ----------
+    url : string
+        The url of the file to download.
+    filename : string
+        The local filename of the file to download.
+    headers : dictionary
+        The headers of the download's request.
+    """
 
     response = requests.post(url, headers=headers, stream=True)
     response.raise_for_status() # check if there is no error
@@ -26,6 +37,13 @@ def download(url="https://", filename="", headers=''):
 ## Print
 ### Challenges
 def print_challenges(challenges_data):
+    """Formated print the Zindi's challenge as table.
+
+    Parameters
+    ----------
+    challenges_data : dictionary | json
+        The json's response of the request to get informations about the challenges.
+    """
 
     n_challenges = challenges_data.shape[0] # total count of retreived challenges
     print("_"*130 )
@@ -48,6 +66,15 @@ def print_challenges(challenges_data):
 ## Print
 ### Leaderboard
 def print_lb(challengers_data, user_rank):
+    """Formated print the Zindi's challenge leaderboard as table.
+
+    Parameters
+    ----------
+    challengers_data : dictionary | json
+        The json's response of the request to get informations about the leaderboard.
+    user_rank : int
+        The rank of the user on the leaderboard of a challenge.
+    """
 
     print("_"*130 )
     print("|{:^6}|{:^20}|{:^44}|{:^12}|{:^12}".format( "" , "" , "", "" ,"" ,  ))
@@ -79,6 +106,13 @@ def print_lb(challengers_data, user_rank):
 ## Print
 ### Submission-board
 def print_submission_board(submissions_data):
+    """Formated print the Zindi's challenge submission-board as table.
+
+    Parameters
+    ----------
+    submissions_data : dictionary | json
+        The json's response of the request to get informations about the submission-board of a challenge.
+    """
 
     print("_"*130 )
     print("|{:^6}|{:^10}|{:^18}|{:^16}|{:^30} |{:^25}".format( "" , "" , "", "" ,"" , "" ,  ))
@@ -109,6 +143,15 @@ def print_submission_board(submissions_data):
 
 ## Join challenge
 def join_challenge( url, headers, ):
+    """Formated print the Zindi's challenge submission-board as table.
+
+    Parameters
+    ----------
+    url : string
+        The url of the selected challenge.
+    headers : dictionary
+        The headers of the request to participate in a challenge.    
+    """
 
     response = requests.post( url, headers=headers )
     response = response.json()['data']
@@ -120,6 +163,27 @@ def join_challenge( url, headers, ):
 
 ## Get available challenges
 def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
+    """Get the available Zindi's challenges using filter options.
+
+    Parameters
+    ----------
+    reward : {'prize', 'points', 'knowledge' , 'all'}, default='all'
+        The reward of the challenges for top challengers.
+    kind : {'competition', 'hackathon', 'all'}, default='all'
+        The kind of the challenges.
+    active : {True, False, 'all'}, default='all'
+        The status of the challenges.
+
+    url : string
+        The url of the selected challenge.
+    headers : dictionary
+        The headers of the request to participate in a challenge.  
+
+    Returns
+    -------
+    challenges_data : pd.DataFrame
+        The response of the request to get informations about the available challenges.
+    """
 
     to_show_challenge_data = ["id","kind",  "subtitle", "reward", "type_of_problem", "data_type", "secret_code_required", "sealed"]
     challenges_data = pd.DataFrame()
@@ -145,6 +209,18 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
 ## challenge index selector
 def challenge_idx_selector(n_challenges):
+    """Get on the keyboard the index of the challenge tha the user want to participate in.
+
+    Parameters
+    ----------
+    n_challenges : integer
+        The number of retrieved challenges.
+
+    Returns
+    -------
+    challenge_index : int
+        The index of the challenge selected by the user.
+    """
 
     challenge_index = -1
 
@@ -166,6 +242,20 @@ def challenge_idx_selector(n_challenges):
 
 ##  Info about the challenges user participate in
 def participations(challenge_id, headers):
+    """Check if user is in team for a the Zindi's challenges.
+
+    Parameters
+    ----------
+    challenge_id : string
+        The id of the selected challenge.
+    headers : dictionary
+        The headers of the request to participate in a challenge.  
+
+    Returns
+    -------
+    challenges_data : pd.DataFrame
+        The response of the request to get informations about the available challenges.
+    """
     url = "https://api.zindi.africa/v1/participations"
     response = requests.get( url, headers=headers )
     response.raise_for_status() # check if there is no error
@@ -176,6 +266,24 @@ def participations(challenge_id, headers):
 
 ## Info about user position on lb 
 def user_on_lb(challengers_data, challenge_id, username, headers):
+    """Get rank of user on the leaderboard for a the Zindi's challenges.
+
+    Parameters
+    ----------
+    challengers_data : dictionary | json
+        The json's response of the request to get informations about the leaderboard.
+    challenge_id : string
+        The id of the selected challenge.
+    username : string
+        The username of the user.
+    headers : dictionary
+        The headers of the request to participate in a challenge.  
+
+    Returns
+    -------
+    user_rank : int
+        The rank of the user on the leaderboard of a challenge.
+    """
     df_lb = pd.DataFrame(challengers_data) # DataFrame verion of the leaderboard
     df_lb = df_lb[ (df_lb.public_rank != None) ] # filter to use only leaderboard part with the active challengers
     try:
