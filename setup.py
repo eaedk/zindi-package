@@ -11,8 +11,9 @@ setuptools.setup(
     description="Zindi user-friendly package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    # url="https://github.com/pypa/sampleproject",
     packages=setuptools.find_packages(),
+    install_requires=["tdqm", "requests", "pandas", "getpass"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
