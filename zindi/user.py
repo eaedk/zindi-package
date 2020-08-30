@@ -19,11 +19,11 @@ from tqdm import tqdm
 class Zindian:
     # __auth_data = ""
     
-    def __init__(self, username):
+    def __init__(self, username, fixed_password=None):
         self.__headers = {'User-Agent' : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
         self.__base_api = "https://api.zindi.africa/v1/competitions"
         self.__auth_data = None #auth & user data from Zindi server after signin
-        self.__signin(username)
+        self.__signin(username, fixed_password)
         self.__challenge_selected = False
 
 # Properties
@@ -94,12 +94,17 @@ class Zindian:
         if fixed_index == None:
             challenge_index = challenge_idx_selector(n_challenges)
         else:
+            error_msg = f"\n[ 🔴 ] The parameter 'fixed_index' must be an integer in range(0, {n_challenges}) to be valid.\n"
             try:
-                if isinstance(fixed_index, int) and (challenge_index > -1) :
+                if isinstance(fixed_index, int) and (fixed_index > -1) :
                     challenge_index = fixed_index
+                    print("alright 'fixed_index' is > -1 ")
                     if (challenge_index < n_challenges) :
-                        msg = f"\n[ 🔴 ] The parameter 'fixed_index' must be an integer in range({n_challenges}) to be valid.\n"
-                        raise Exception(msg)
+                        print(f"alright 'fixed_index' is < {n_challenges} ")
+                    else:
+                        raise Exception(error_msg)
+                else:
+                    raise Exception(error_msg)
             except Exception as e:
                 print("\n[ 🔴 ] The parameter 'fixed_index' value must be None or a valid integer.\n")
                 print(e)

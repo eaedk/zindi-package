@@ -143,7 +143,7 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 ## challenge index selector
 def challenge_idx_selector(n_challenges):
 
-    challenge_index = None
+    challenge_index = -1
 
     while True:
         user_input = input("Type the index of the challenge you want to select or 'q' to exit.\n>>")
