@@ -123,15 +123,15 @@ def print_submission_board(submissions_data):
         date = pd.to_datetime(data['created_at'] ).strftime("%d %b %Y, %H:%M") # Date of submission
         id = data['id'] # submission's id
         
-        if data['status'] in ['successful", "initial']: 
+        if data['status'] in [ "successful" , "initial" ]: 
             status = "🟢" # Status - for valid of the submission
             score = data['private_score'] if "private_score" in data else data['public_score'] # Score of the submission
-            score = "In processing" if score == None else score # Show a message when processing of the score is not yet finished
-            comment = "" if data['comment'] == None else data['comment'] # Comment of the submission
+            score = "In processing" if score is None else score # Show a message when processing of the score is not yet finished
+            comment = "" if data['comment'] is None else data['comment'] # Comment of the submission
         else:
             score = "-" # Score of the submission : "-" for wrong submission
             status = "🔴" # Status - for wrong of the submission
-            comment = "" if data['status_description'] == None else data['status_description'] # Submission error description
+            comment = "" if data['status_description'] is None else data['status_description'] # Submission error description
         print("-"*130 )
         try:
             print("|{:^5}|{:^10}|{:^12}| {:^14.14} |{:30.30} |{:40.40}".format( status , id , date, str(score) , filename, comment ,  ))

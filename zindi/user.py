@@ -67,7 +67,7 @@ class Zindian:
     def __signin(self, username ,fixed_password=None):
         
         url = "https://api.zindi.africa/v1/auth/signin"
-        if fixed_password == None:
+        if fixed_password is None:
             password = getpass(prompt='Your password\n>> ')
         else:
             password = fixed_password
@@ -93,7 +93,7 @@ class Zindian:
         print_challenges( challenges_data=challenges_data )
         n_challenges = challenges_data.shape[0]
 
-        if fixed_index == None:
+        if fixed_index is None:
             challenge_index = challenge_idx_selector(n_challenges)
         else:
             error_msg = f"\n[ 🔴 ] The parameter 'fixed_index' must be an integer in range(0, {n_challenges}) to be valid.\n"
