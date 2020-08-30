@@ -12,7 +12,7 @@ user = Zindian("")
 
 user.which_challenge
 
-user.select_a_challenge()
+user.select_a_challenge(fixed_index=None)
 
 # user.which_challenge
 

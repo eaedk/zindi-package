@@ -86,7 +86,7 @@ class Zindian:
     def select_a_challenge(self, reward='all', kind='all', active='all', fixed_index=None):
         
         headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
-        url = "https://api.zindi.africa/v1/competitions" 
+        url = self.__base_api 
         challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
         print_challenges( challenges_data=challenges_data )
         n_challenges = challenges_data.shape[0]
