@@ -7,22 +7,23 @@ sys.path.append(parentdir)
 
 from zindi.user import Zindian
 
-
-user = Zindian("")
+## FOR TEST
+USERNAME, PASSWORD = "eaedk", "Eaedk.01021999"
+user = Zindian(username=USERNAME, fixed_password=PASSWORD)
 
 user.which_challenge
 
-user.select_a_challenge()
+user.select_a_challenge(fixed_index=3) # 
 
-# user.which_challenge
+user.which_challenge
 
 # user.leaderboard()
 
-# user.my_rank
+user.my_rank
 
 # user.download_dataset(destination="tests/dataset")
 
-user.submit(filepaths=['tests/dataset/SampleSubmission.csv'])
+# user.submit(filepaths=['tests/dataset/SampleSubmission.csv'])
 
 user.submission_board()
 
