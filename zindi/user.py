@@ -85,7 +85,7 @@ class Zindian:
 ## Select a challenge to participate in
     def select_a_challenge(self, reward='all', kind='all', active='all', fixed_index=None):
         
-        headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
+        headers = self.__headers 
         url = self.__base_api 
         challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
         print_challenges( challenges_data=challenges_data )
@@ -148,6 +148,7 @@ class Zindian:
                     if os.path.isfile(filepath):
                         file = {"file": open(filepath, 'rb')} # Loading the file to be submitted
                         data = {"comment": comment}
+                        print(f"[INFO] Submiting file : {filepath}")
                         response = requests.post(url, headers=headers, files=file, data=data,)
                         response = response.json()['data']
                         try:
