@@ -115,7 +115,7 @@ def join_challenge( url, headers, ):
         print(f"\n[ 🟢 ] {response}\n")
 
 
-## Show available challenges
+## Get available challenges
 def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
     to_show_challenge_data = ["id","kind",  "subtitle", "reward", "type_of_problem", "data_type", "secret_code_required", "sealed"]
@@ -139,6 +139,24 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
         challenges_data = challenges_data[to_show_challenge_data]
     return challenges_data
 
+
+## challenge index selector
+def challenge_idx_selector(n_challenges):
+
+    challenge_index = None
+
+    while True:
+        user_input = input("Type the index of the challenge you want to select or 'q' to exit.\n>>")
+        try: # user_input must be a valid integer or 'q' else we stay in the infinite loop
+            challenge_index = int( user_input.strip() )
+
+            if (challenge_index >= 0) and (challenge_index < n_challenges):
+                return challenge_index
+        except:
+            if user_input.lower().strip() == 'q': # to stop selection 
+                return challenge_index 
+            else:
+                print("\n\n[ 🔴 ] Please enter a correct challenge index.\n")
 
 ##  Info about the challenges user participate in
 def participations(challenge_id, headers):

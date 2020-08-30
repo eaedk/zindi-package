@@ -21,6 +21,8 @@ class Zindian:
     
     def __init__(self, username):
         self.__headers = {'User-Agent' : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
+        self.__base_api = "https://api.zindi.africa/v1/competitions"
+        self.__auth_data = None #auth & user data from Zindi server after signin
         self.__signin(username)
         self.__challenge_selected = False
 
@@ -60,10 +62,13 @@ class Zindian:
 
 # Account
 ## Sign In
-    def __signin(self, username ):
+    def __signin(self, username ,fixed_password=None):
         
         url = "https://api.zindi.africa/v1/auth/signin"
-        password = getpass(prompt='Your password\n>> ')
+        if fixed_password == None:
+            password = getpass(prompt='Your password\n>> ')
+        else:
+            password = fixed_password
         data = {"username": username, "password": password }
 
 
@@ -73,37 +78,39 @@ class Zindian:
             print( f'[ 🔴 ] {response["errors"]}' )
         except:
             print( f"[ 🟢 ] 👋🏾👋🏾 Welcome {response['user']['username'] } 👋🏾👋🏾\n" )
-
-            headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
-            challenges_url = "https://api.zindi.africa/v1/competitions" 
-            challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=challenges_url, headers=headers )
-            print("[INFO] Here are the available challenges ...\n")
-            print_challenges( challenges_data=challenges_data )
             self.__auth_data = response
 
 
 # Challenge
 ## Select a challenge to participate in
-    def select_a_challenge(self, reward='all', kind='all', active='all',):
+    def select_a_challenge(self, reward='all', kind='all', active='all', fixed_index=None):
         
         headers = {**self.__headers, "auth_token":self.__auth_data["auth_token"] }
         url = "https://api.zindi.africa/v1/competitions" 
         challenges_data = get_challenges(reward=reward, kind=kind, active=active, url=url, headers=headers )
         print_challenges( challenges_data=challenges_data )
-        while True:
-            # challenge_index = input("Type index of the challenge you want to participate in.\n>>")
-            try:
-                # challenge_index = int( challenge_index.strip() )
-                challenge_index = 3
-                self.__challenge_data = challenges_data.iloc[challenge_index]
-                self.__api = f"https://api.zindi.africa/v1/competitions/{self.__challenge_data['id']}"
-                self.__challenge_selected = True
+        n_challenges = challenges_data.shape[0]
 
-                print(f"\n\n[ 🟢 ] You choose challenge : {self.__challenge_data['id']},\n{self.__challenge_data['subtitle']} .\n")
-                # Stop the inifinite loop when a challenge is choose
-                break
-            except:
-                print("\n\n[ 🔴 ] Please enter a correct challenge index.\n")
+        if fixed_index == None:
+            challenge_index = challenge_idx_selector(n_challenges)
+        else:
+            try:
+                if isinstance(fixed_index, int) and (challenge_index > -1) :
+                    challenge_index = fixed_index
+                    if (challenge_index < n_challenges) :
+                        msg = f"\n[ 🔴 ] The parameter 'fixed_index' must be an integer in range({n_challenges}) to be valid.\n"
+                        raise Exception(msg)
+            except Exception as e:
+                print("\n[ 🔴 ] The parameter 'fixed_index' value must be None or a valid integer.\n")
+                print(e)
+        if challenge_index > -1 :
+            self.__challenge_data = challenges_data.iloc[challenge_index]
+            self.__api = f"h{self.__base_api}/{self.__challenge_data['id']}"
+            self.__challenge_selected = True
+
+            print(f"\n\n[ 🟢 ] You choose the challenge : {self.__challenge_data['id']},\n{self.__challenge_data['subtitle']}.\n")
+            
+            
 
 ## Download dataset
     def download_dataset(self, destination="." ):
