@@ -142,7 +142,7 @@ def print_submission_board(submissions_data):
 
 ## Join challenge
 def join_challenge( url, headers, ):
-    """Formated print the Zindi's challenge submission-board as table.
+    """Subscribe to a Zindi's challenge
 
     Parameters
     ----------
