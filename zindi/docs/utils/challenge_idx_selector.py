@@ -1,5 +1,5 @@
 def challenge_idx_selector(n_challenges):
-    """Get on the keyboard the index of the challenge tha the user want to participate in.
+    """Get from the keyboard the index of the challenge tha the user want to participate in.
 
     Parameters
     ----------

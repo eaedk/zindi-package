@@ -142,7 +142,7 @@ def print_submission_board(submissions_data):
 
 ## Join challenge
 def join_challenge( url, headers, ):
-    """Formated print the Zindi's challenge submission-board as table.
+    """Subscribe to a Zindi's challenge
 
     Parameters
     ----------
@@ -208,7 +208,7 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
 
 ## challenge index selector
 def challenge_idx_selector(n_challenges):
-    """Get on the keyboard the index of the challenge tha the user want to participate in.
+    """Get from the keyboard the index of the challenge tha the user want to participate in.
 
     Parameters
     ----------
