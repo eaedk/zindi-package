@@ -4,7 +4,7 @@ class Url:
 
     def __init__(self, challenge_id):
         
-        
+        #api link on which all requests will be based
         self.api = f"{self.base_api}/{challenge_id}"
 
         self._ = f"{self.api}/"
