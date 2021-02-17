@@ -1,4 +1,4 @@
-def join_challenge( url, headers, ):
+def join_challenge( url, headers, code=False):
     """Formated print the Zindi's challenge submission-board as table.
 
     Parameters
