@@ -97,7 +97,36 @@ def print_challenges(challenges_data):
         challenge = f"{visibility} {kind}" # general challenge's kind - join visibility & kind 
         print("-"*130 )
         print ("|{:^5}|{:^14.14}|{:^18.18}|{:^20.20}| {:10}".format( i , challenge , problem , reward , id ,  ))
-    print(f"{'_'*130}\n\n" )   
+    print(f"{'_'*130}\n\n" )  
+#######
+# New version  of the above function
+def print_challenges_(challenges_data):
+    """Formated print the Zindi's challenge as table.
+
+    Parameters
+    ----------
+    challenges_data : dictionary | json
+        The json's response of the request to get informations about the challenges.
+    """
+
+    n_challenges = challenges_data.shape[0] # total count of retreived challenges
+    print(challenges_data)
+    # print("_"*130 )
+    # print("|{:^5}|{:^14.14}|{:^18.18}|{:^20.20}|{:^10}".format( "" , "" , "", "" , "" ,  ))
+    # print("|{:^5}|{:^14.14}|{:^18.18}|{:^20.20}|{:^10}".format( "index" , "challenge" , "problem", "reward" , "id" ,  ))
+    # print("|{:^5}|{:^14.14}|{:^18.18}|{:^20.20}|{:^10}".format( "" , "" , "", "" , "" ,  ))
+    # # for data in challenges_data:
+    # for i in range(n_challenges):
+    #     data = dict(challenges_data.iloc[i]) # data - each challenge, one after another
+    #     reward = data['reward'] # Challenge's reward for top challengers
+    #     id = data['id'][:50]+"..." # Challenge's id
+    #     problem = '' if  len(data['type_of_problem'])==0 else data['type_of_problem'][0] # category of the challenge's problem
+    #     kind = "Hack" if data['kind'] == "hackathon" else "Compet"  # simple challenge's kind
+    #     visibility = 'Public' if not data['secret_code_required'] else 'Private' # Challenge's visibility
+    #     challenge = f"{visibility} {kind}" # general challenge's kind - join visibility & kind 
+    #     print("-"*130 )
+    #     print ("|{:^5}|{:^14.14}|{:^18.18}|{:^20.20}| {:10}".format( i , challenge , problem , reward , id ,  ))
+    # print(f"{'_'*130}\n\n" )  
 
 
 ## Print
