@@ -154,7 +154,7 @@ class Zindian:
 
 # Challenge
 ## Select a challenge to participate in
-    def select_a_challenge(self, reward='all', kind='all', active='all', fixed_index=None):
+    def select_challenge(self, reward='all', kind='all', active='all', fixed_index=None):
         """Select a challenge among those available on Zindi, using filter options.
 
         Parameters

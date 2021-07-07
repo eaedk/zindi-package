@@ -253,6 +253,9 @@ def get_challenges(reward='all', kind='all', active='all', url='', headers='' ):
     
     # request
     response = requests.get( url, headers=headers , params=sorting_params)
+
+    return response.json()
+    
     response = response.json()['data']
     try: # raise error if request failed
         print( response['errors'] )
