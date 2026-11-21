@@ -1,2 +1,46 @@
-*__pycache__/
-tests/dataset/*
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# JavaScript
+node_modules/
+js/dist/
+*.tgz
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+*.Rcheck/
+r/*.tar.gz
+
+# Rust
+rust/target/
+
+# Docs
+site/
+
+# Never commit credentials or downloaded competition data
+credentials.json
+.env
+data/
+dataset/

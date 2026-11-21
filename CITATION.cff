@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+title: "zindi: clients for the Zindi data science competition platform"
+type: software
+authors:
+  - family-names: Koupoh
+    given-names: Emmanuel
+  - family-names: Tuo
+    given-names: Muhamed
+  - family-names: Manouan
+    given-names: Cédric
+repository-code: "https://github.com/eaedk/zindi-package"
+url: "https://eaedk.github.io/zindi-package/"
+license: MIT
+version: 1.0.0
+date-released: 2026-11-21
+keywords:
+  - zindi
+  - machine learning
+  - data science competitions
+  - cli
