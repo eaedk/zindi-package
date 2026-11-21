@@ -10,7 +10,7 @@ authors:
   - family-names: Manouan
     given-names: Cédric
 repository-code: "https://github.com/eaedk/zindi-package"
-url: "https://eaedk.github.io/zindi-package/"
+url: "https://zindi.readthedocs.io/en/latest/"
 license: MIT
 version: 1.0.0
 date-released: 2026-11-21

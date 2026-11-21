@@ -11,7 +11,7 @@ data, submit, wait for your score, follow the leaderboard and manage your team.
 - Node.js 18 or newer on Windows, macOS and Linux (uses the built-in `fetch`).
 - Same behaviour and the same login as the [Python, R and Rust clients](https://github.com/eaedk/zindi-package).
 
-**[Documentation](https://eaedk.github.io/zindi-package/)** ·
+**[Documentation](https://zindi.readthedocs.io/en/latest/)** ·
 [Repository](https://github.com/eaedk/zindi-package) ·
 [Changelog](https://github.com/eaedk/zindi-package/blob/main/js/CHANGELOG.md)
 

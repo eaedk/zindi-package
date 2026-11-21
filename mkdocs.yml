@@ -1,6 +1,6 @@
 site_name: zindi
 site_description: Compete on Zindi from Python, the command line, notebooks, R, JavaScript and Rust.
-site_url: https://eaedk.github.io/zindi-package/
+site_url: https://zindi.readthedocs.io/en/latest/
 repo_url: https://github.com/eaedk/zindi-package
 repo_name: eaedk/zindi-package
 edit_uri: edit/main/docs/

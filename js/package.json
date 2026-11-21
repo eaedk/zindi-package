@@ -43,7 +43,7 @@
     "url": "git+https://github.com/eaedk/zindi-package.git",
     "directory": "js"
   },
-  "homepage": "https://eaedk.github.io/zindi-package/",
+  "homepage": "https://zindi.readthedocs.io/en/latest/",
   "bugs": {
     "url": "https://github.com/eaedk/zindi-package/issues"
   },

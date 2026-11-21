@@ -12,7 +12,7 @@ It talks to the same API and reads the same credentials file as the Python, Java
 and R clients of the [zindi-package](https://github.com/eaedk/zindi-package) project: log
 in once with any of them and every client is logged in.
 
-Full documentation: <https://eaedk.github.io/zindi-package/> and
+Full documentation: <https://zindi.readthedocs.io/en/latest/> and
 [docs.rs/zindi](https://docs.rs/zindi).
 
 ## Install

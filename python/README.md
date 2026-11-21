@@ -9,7 +9,7 @@ Compete on [Zindi](https://zindi.world) from Python, the command line, or a note
 browse competitions, join, download data, submit, wait for your score, follow the
 leaderboard and manage your team.
 
-**[Documentation](https://eaedk.github.io/zindi-package/)** ·
+**[Documentation](https://zindi.readthedocs.io/en/latest/)** ·
 [Open in Colab](https://colab.research.google.com/github/eaedk/zindi-package/blob/main/examples/quickstart.ipynb) ·
 [Changelog](https://github.com/eaedk/zindi-package/blob/main/python/CHANGELOG.md)
 
@@ -34,7 +34,7 @@ zindi submit submission.csv -m "lgbm v1" --wait
 zindi leaderboard
 ```
 
-Run `zindi --help` or see the [CLI guide](https://eaedk.github.io/zindi-package/cli/).
+Run `zindi --help` or see the [CLI guide](https://zindi.readthedocs.io/en/latest/cli/).
 
 ## Library
 

@@ -14,7 +14,7 @@ Description: Compete on 'Zindi' <https://zindi.world> from R. Browse and
     is enough.
 License: MIT + file LICENSE
 URL: https://github.com/eaedk/zindi-package,
-    https://eaedk.github.io/zindi-package/
+    https://zindi.readthedocs.io/en/latest/
 BugReports: https://github.com/eaedk/zindi-package/issues
 Depends:
     R (>= 4.1.0)

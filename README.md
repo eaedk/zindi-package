@@ -11,10 +11,10 @@ the leaderboard from Python, the command line, Jupyter/Colab, R, JavaScript or R
 [![npm](https://img.shields.io/npm/v/zindi?label=npm&color=f5a623)](https://www.npmjs.com/package/zindi)
 [![crates.io](https://img.shields.io/crates/v/zindi?label=crates.io&color=f5a623)](https://crates.io/crates/zindi)
 [![Python CI](https://github.com/eaedk/zindi-package/actions/workflows/python.yml/badge.svg)](https://github.com/eaedk/zindi-package/actions/workflows/python.yml)
-[![Docs](https://img.shields.io/badge/docs-eaedk.github.io-blue)](https://eaedk.github.io/zindi-package/)
+[![Docs](https://readthedocs.org/projects/zindi/badge/?version=latest)](https://zindi.readthedocs.io/en/latest/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-[Documentation](https://eaedk.github.io/zindi-package/) ·
+[Documentation](https://zindi.readthedocs.io/en/latest/) ·
 [Quick start](#quick-start) ·
 [Open in Colab](https://colab.research.google.com/github/eaedk/zindi-package/blob/main/examples/quickstart.ipynb) ·
 [Contributing](CONTRIBUTING.md)
@@ -100,7 +100,7 @@ Credentials are looked up in this order, so you rarely have to think about them:
 5. an interactive prompt.
 
 Details, including where the file lives on each OS, are in the
-[authentication guide](https://eaedk.github.io/zindi-package/authentication/).
+[authentication guide](https://zindi.readthedocs.io/en/latest/authentication/).
 
 ## Project layout
 

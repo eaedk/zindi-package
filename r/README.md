@@ -7,7 +7,7 @@ Compete on [Zindi](https://zindi.world) from R: browse competitions, join,
 download data, submit, wait for your score, follow the leaderboard and manage
 your team.
 
-**[Documentation](https://eaedk.github.io/zindi-package/)** ·
+**[Documentation](https://zindi.readthedocs.io/en/latest/)** ·
 [Changelog](NEWS.md)
 
 ## Install

@@ -62,7 +62,7 @@ the HTTP status and the raw error object.
 Useful links:
 \itemize{
   \item \url{https://github.com/eaedk/zindi-package}
-  \item \url{https://eaedk.github.io/zindi-package/}
+  \item \url{https://zindi.readthedocs.io/en/latest/}
   \item Report bugs at \url{https://github.com/eaedk/zindi-package/issues}
 }
 

@@ -53,7 +53,7 @@ zindi = "zindi.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/eaedk/zindi-package"
-Documentation = "https://eaedk.github.io/zindi-package/"
+Documentation = "https://zindi.readthedocs.io/en/latest/"
 Repository = "https://github.com/eaedk/zindi-package"
 Issues = "https://github.com/eaedk/zindi-package/issues"
 Changelog = "https://github.com/eaedk/zindi-package/blob/main/python/CHANGELOG.md"
