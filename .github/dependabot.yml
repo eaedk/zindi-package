@@ -10,6 +10,11 @@ updates:
   - package-ecosystem: npm
     directory: /js
     schedule: { interval: monthly }
+    ignore:
+      # The types are pinned to Node 18 on purpose: typechecking then fails if the
+      # client starts using APIs that Node 18 users do not have.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: cargo
     directory: /rust
     schedule: { interval: monthly }
