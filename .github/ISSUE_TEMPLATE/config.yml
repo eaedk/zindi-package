@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or idea to discuss
+    url: https://github.com/eaedk/zindi-package/discussions
+    about: Ask how to do something, or share an idea before writing code.
+  - name: Problem with Zindi itself (account, competition, scoring)
+    url: https://zindi.world/contact
+    about: This project is not run by Zindi; contact them for platform issues.

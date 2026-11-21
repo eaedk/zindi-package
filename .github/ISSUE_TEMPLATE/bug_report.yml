@@ -1,0 +1,30 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: dropdown
+    id: client
+    attributes:
+      label: Which client?
+      options: [Python library, CLI, Notebook explorer, JavaScript, R, Rust]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you ran, what you expected, what you got. Paste errors as text.
+      placeholder: |
+        I ran `zindi download` and got ...
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `zindi doctor`
+      description: For non-Python clients, tell us your OS and language version instead. Never paste your token.
+      render: text
+  - type: input
+    id: competition
+    attributes:
+      label: Competition id (if relevant)
