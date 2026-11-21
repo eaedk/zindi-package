@@ -1,0 +1,36 @@
+name: Live API check
+
+# Zindi has no public API changelog. This weekly job tells us early when the
+# platform changes in a way that breaks the clients.
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    env:
+      ZINDI_LIVE: "1"
+      ZINDI_TOKEN: ${{ secrets.ZINDI_TOKEN }}
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run pytest -m live -v
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Live API check failed ($(date -u +%Y-%m-%d))" \
+            --label "api-change" \
+            --body "The weekly read-only check against the Zindi API failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID. Zindi may have changed an endpoint; see spec/README.md."

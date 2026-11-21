@@ -1,0 +1,24 @@
+{
+  "data": {
+    "username": "amina_dev",
+    "first_name": "Amina",
+    "last_name": "Diallo",
+    "title": "Data scientist",
+    "country": "Senegal",
+    "countrycode": "sn",
+    "points": 1250,
+    "rank": 812,
+    "best_rank": 3,
+    "count_of_competitions": 14,
+    "count_of_hackathons": 2,
+    "count_of_submissions": 187,
+    "count_of_discussions": 9,
+    "user_medals_summary_gold_count": 1,
+    "user_medals_summary_silver_count": 2,
+    "user_medals_summary_bronze_count": 4,
+    "open_to_teaming_up": true,
+    "is_verified": true,
+    "created_at": "2023-04-02T09:12:44.000Z",
+    "avatar": "https://api.zindi.world/fallbacks/avatar/thumb.default.png"
+  }
+}

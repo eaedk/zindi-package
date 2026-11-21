@@ -1,0 +1,83 @@
+{
+  "data": {
+    "id": "Crop-Yield-Forecast-Challenge",
+    "title": "Crop Yield Forecast Challenge",
+    "kind": "competition",
+    "reward": "$10 000 USD",
+    "reward_type": "prize",
+    "organization": "Example Agritech",
+    "open": true,
+    "start_time": "2026-10-01T09:00:00.000Z",
+    "end_time": "2026-12-31T23:59:00.000Z",
+    "entries_close_at": null,
+    "participations_count": 812,
+    "secret_code_required": false,
+    "sealed": false,
+    "is_participant": false,
+    "is_beginner_friendly": true,
+    "is_access_restricted": false,
+    "show_ranks": true,
+    "image": "https://example.com/crop.png",
+    "cohort": false,
+    "subtitle": "Predict maize yield per district from satellite and weather data",
+    "error_metric": "RMSE",
+    "max_number_of_participants_per_team": 4,
+    "allow_teams": true,
+    "difficulty": "intermediate",
+    "data_type": [
+      "tabular",
+      "image"
+    ],
+    "type_of_problem": [
+      "regression"
+    ],
+    "skills": [
+      "Python",
+      "Remote sensing"
+    ],
+    "submissions_closed_at": null,
+    "leaderboard_participations_count": 640,
+    "datafiles": [
+      {
+        "filename": "Train.csv",
+        "filesize": 1048576,
+        "position": 0,
+        "zip_of_everything": false,
+        "description": "Training data with yield labels."
+      },
+      {
+        "filename": "Test.csv",
+        "filesize": 262144,
+        "position": 1,
+        "zip_of_everything": false,
+        "description": "Districts to predict."
+      },
+      {
+        "filename": "SampleSubmission.csv",
+        "filesize": 2048,
+        "position": 2,
+        "zip_of_everything": false,
+        "description": "Expected submission format."
+      },
+      {
+        "filename": "all_data.zip",
+        "filesize": 1310720,
+        "position": 3,
+        "zip_of_everything": true,
+        "description": "Every file in one archive."
+      }
+    ],
+    "pages": [
+      {
+        "title": "Description",
+        "url_title": "description",
+        "content_html": "<p>Help farmers plan by forecasting maize yields.</p>"
+      },
+      {
+        "title": "Rules",
+        "url_title": "rules",
+        "content_html": "<ul><li>You may make a maximum of 10 submissions per day.</li><li>Teams of up to 4.</li></ul>"
+      }
+    ]
+  }
+}

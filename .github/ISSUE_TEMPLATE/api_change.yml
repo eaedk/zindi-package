@@ -1,0 +1,17 @@
+name: Zindi API changed
+description: An endpoint stopped working or returns something different.
+labels: [api-change]
+body:
+  - type: textarea
+    id: endpoint
+    attributes:
+      label: Endpoint and symptom
+      placeholder: "GET /competitions/{id}/submissions now returns ..."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Error message or a redacted sample response. Remove tokens and personal data.
+      render: text

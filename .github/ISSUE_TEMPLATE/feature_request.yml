@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest something that would help you compete.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the situation and why the current tools do not help.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like?
+      description: A command, a method, an option... Sketch how you would use it.
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to implement this myself (we will help).

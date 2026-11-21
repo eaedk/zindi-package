@@ -1,0 +1,66 @@
+site_name: zindi
+site_description: Compete on Zindi from Python, the command line, notebooks, R, JavaScript and Rust.
+site_url: https://eaedk.github.io/zindi-package/
+repo_url: https://github.com/eaedk/zindi-package
+repo_name: eaedk/zindi-package
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2020-2026 Emmanuel Koupoh and the zindi contributors
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: amber
+      accent: deep orange
+      toggle: { icon: material/weather-night, name: Dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: amber
+      accent: deep orange
+      toggle: { icon: material/weather-sunny, name: Light mode }
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: installation.md
+      - Your first submission: quickstart.md
+      - Authentication: authentication.md
+  - Guides:
+      - Command line: cli.md
+      - Python library: python.md
+      - Notebooks (Jupyter, Colab, Kaggle): notebooks.md
+      - Migrating from 0.x: migration.md
+  - Other languages:
+      - JavaScript / TypeScript: languages/javascript.md
+      - R: languages/r.md
+      - Rust: languages/rust.md
+  - Reference:
+      - Zindi API: api.md
+      - Troubleshooting: troubleshooting.md
+  - Contributing: contributing.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.details
+  - pymdownx.highlight: { anchor_linenums: true }
+  - pymdownx.inlinehilite
+  - pymdownx.snippets: { base_path: ["."], check_paths: true }
+  - pymdownx.superfences
+  - pymdownx.tabbed: { alternate_style: true }
+
+plugins:
+  - search

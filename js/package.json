@@ -1,0 +1,64 @@
+{
+  "name": "zindi",
+  "version": "1.0.0",
+  "description": "Join Zindi competitions, download data, submit and climb the leaderboard from JavaScript and TypeScript.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test",
+    "prepublishOnly": "npm run typecheck && npm test"
+  },
+  "keywords": [
+    "zindi",
+    "machine-learning",
+    "data-science",
+    "competitions",
+    "hackathons",
+    "leaderboard",
+    "api-client",
+    "africa"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eaedk/zindi-package.git",
+    "directory": "js"
+  },
+  "homepage": "https://eaedk.github.io/zindi-package/",
+  "bugs": {
+    "url": "https://github.com/eaedk/zindi-package/issues"
+  },
+  "author": "Emmanuel Koupoh",
+  "contributors": [
+    "Muhamed Tuo",
+    "Cédric Manouan"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "typescript": "^7.0.2"
+  }
+}

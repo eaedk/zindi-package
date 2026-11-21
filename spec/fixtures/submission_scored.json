@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": "sub_d4",
+      "status": "successful",
+      "filename": "submission.csv",
+      "comment": "first try",
+      "created_at": "2026-11-21T08:00:00.000Z",
+      "public_score": 0.4211,
+      "private_score": null,
+      "status_description": null,
+      "chosen": false,
+      "submitter": {
+        "username": "amina_dev"
+      }
+    }
+  ],
+  "meta": {
+    "total_count": 1,
+    "per_page": 50
+  }
+}
