@@ -1,0 +1,422 @@
+openapi: 3.1.0
+info:
+  title: Zindi platform API (community description)
+  version: "2026.11"
+  summary: The subset of the Zindi API used by the zindi client libraries.
+  description: |
+    Zindi does not publish an official API reference. This document describes the
+    endpoints that the web application at https://zindi.world uses and that the
+    client libraries in this repository rely on. It is maintained by the community
+    and may lag behind the platform. If something here is wrong, please open an
+    issue or a pull request.
+
+    Conventions observed on the platform:
+
+    * Every JSON response is wrapped in an envelope: `{"data": ..., "meta": ...}`.
+    * Errors are reported inside the envelope as `{"data": {"errors": {...}}}`,
+      sometimes with an HTTP 2xx status. Clients must check for `data.errors`.
+    * Authenticated requests send the token returned by `POST /auth/signin` in the
+      `auth-token` header.
+    * List endpoints are paginated with zero-based `page` and `per_page` query
+      parameters; `meta.total_count` gives the total number of items.
+    * The legacy host `https://api.zindi.africa/v1` permanently redirects (308) to
+      `https://api.zindi.world/v1`.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.zindi.world/v1
+security:
+  - {}
+  - authToken: []
+
+tags:
+  - name: auth
+  - name: competitions
+  - name: participation
+  - name: submissions
+  - name: teams
+  - name: users
+
+paths:
+  /auth/signin:
+    post:
+      tags: [auth]
+      summary: Exchange a username and password for an auth token.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string }
+                password: { type: string, format: password }
+      responses:
+        "200":
+          description: Signed in, or an error envelope (for example a wrong password).
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/SigninEnvelope"
+                  - $ref: "#/components/schemas/ErrorEnvelope"
+              examples:
+                ok: { externalValue: fixtures/signin_ok.json }
+                wrongPassword: { externalValue: fixtures/signin_wrong_password.json }
+
+  /me:
+    get:
+      tags: [users]
+      summary: The signed-in user.
+      security: [{ authToken: [] }]
+      responses:
+        "200":
+          description: The current user.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/me.json }
+
+  /users/{username}:
+    get:
+      tags: [users]
+      summary: Public profile of a user.
+      parameters:
+        - { name: username, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The user profile.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/user_profile.json }
+
+  /competitions:
+    get:
+      tags: [competitions]
+      summary: List and search competitions.
+      parameters:
+        - { name: page, in: query, schema: { type: integer, minimum: 0, default: 0 } }
+        - { name: per_page, in: query, schema: { type: integer, minimum: 1, default: 20 } }
+        - name: kind[]
+          in: query
+          description: Restrict to one kind. Repeatable.
+          schema: { type: string, enum: [competition, hackathon] }
+        - name: active
+          in: query
+          description: "`true` to list only competitions that are currently open."
+          schema: { type: boolean }
+        - name: prize
+          in: query
+          description: Reward type filter.
+          schema: { type: string, enum: [prize, points, knowledge] }
+        - name: query
+          in: query
+          description: Free-text search.
+          schema: { type: string }
+      responses:
+        "200":
+          description: A page of competitions.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CompetitionListEnvelope" }
+              examples:
+                ok: { externalValue: fixtures/competitions.json }
+
+  /competitions/{competition}:
+    get:
+      tags: [competitions]
+      summary: Full details of a competition, including its data files and rules.
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      responses:
+        "200":
+          description: The competition.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/competition.json }
+
+  /competitions/{competition}/files/{filename}:
+    get:
+      tags: [competitions]
+      summary: Download one data file. Requires having joined the competition.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+        - { name: filename, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The file content (possibly after a redirect to object storage).
+          content:
+            application/octet-stream: {}
+
+  /competitions/{competition}/participations:
+    get:
+      tags: [participation]
+      summary: The leaderboard.
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+        - { name: page, in: query, schema: { type: integer, minimum: 0, default: 0 } }
+        - { name: per_page, in: query, schema: { type: integer, minimum: 1, default: 50 } }
+      responses:
+        "200":
+          description: A page of leaderboard rows.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/leaderboard.json }
+    post:
+      tags: [participation]
+      summary: Join a competition.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                secret_code:
+                  type: string
+                  description: Required when the competition has `secret_code_required`.
+      responses:
+        "200":
+          description: Joined, or an error envelope (already joined, secret code required, ...).
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/join_ok.json }
+                alreadyIn: { externalValue: fixtures/join_already.json }
+                secretCode: { externalValue: fixtures/join_secret_required.json }
+
+  /competitions/{competition}/participations/my_participation:
+    get:
+      tags: [participation]
+      summary: The signed-in user's row on the leaderboard.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      responses:
+        "200":
+          description: The participation.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/my_participation.json }
+
+  /competitions/{competition}/submissions:
+    get:
+      tags: [submissions]
+      summary: The signed-in user's (or team's) submissions.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+        - { name: per_page, in: query, schema: { type: integer, default: 50 } }
+      responses:
+        "200":
+          description: Submissions, newest first.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/submissions.json }
+    post:
+      tags: [submissions]
+      summary: Upload a submission file.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file: { type: string, format: binary }
+                comment: { type: string }
+      responses:
+        "200":
+          description: The created submission, or an error envelope.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/submission_created.json }
+
+  /competitions/{competition}/submissions/limits:
+    get:
+      tags: [submissions]
+      summary: How many submissions the user can still make.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      responses:
+        "200":
+          description: Submission limits. `today` is the number of submissions left today.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/submission_limits.json }
+
+  /competitions/{competition}/my_team:
+    get:
+      tags: [teams]
+      summary: The signed-in user's team in this competition.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      responses:
+        "200":
+          description: The team.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/my_team.json }
+    post:
+      tags: [teams]
+      summary: Create a team (the caller becomes its leader).
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title: { type: string }
+      responses:
+        "200":
+          description: The team, or an error envelope.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/team_created.json }
+    delete:
+      tags: [teams]
+      summary: Disband the team.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      responses:
+        "200":
+          description: Disbanded.
+
+  /competitions/{competition}/my_team/invite:
+    post:
+      tags: [teams]
+      summary: Invite a user to the team.
+      security: [{ authToken: [] }]
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [username]
+              properties:
+                username: { type: string }
+      responses:
+        "200":
+          description: Invitation sent, or an error envelope.
+
+  /competitions/{competition}/discussions:
+    get:
+      tags: [competitions]
+      summary: Discussion threads of a competition.
+      parameters:
+        - $ref: "#/components/parameters/Competition"
+        - { name: page, in: query, schema: { type: integer, default: 0 } }
+        - { name: per_page, in: query, schema: { type: integer, default: 20 } }
+      responses:
+        "200":
+          description: A page of discussions.
+          content:
+            application/json:
+              examples:
+                ok: { externalValue: fixtures/discussions.json }
+
+components:
+  securitySchemes:
+    authToken:
+      type: apiKey
+      in: header
+      name: auth-token
+
+  parameters:
+    Competition:
+      name: competition
+      in: path
+      required: true
+      description: The competition id (its slug), for example `GenAI-for-Good-Challenge`.
+      schema: { type: string }
+
+  schemas:
+    ErrorEnvelope:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          required: [errors]
+          properties:
+            errors:
+              description: |
+                Either `{"message": "..."}`, `{"base": "..."}` or a map of field
+                names to messages, for example `{"password": "wrong password"}`.
+              type: object
+              additionalProperties: true
+
+    SigninEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          required: [auth_token, user]
+          properties:
+            auth_token: { type: string }
+            user:
+              type: object
+              properties:
+                username: { type: string }
+
+    CompetitionSummary:
+      type: object
+      required: [id]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        subtitle: { type: string }
+        kind: { type: string, enum: [competition, hackathon] }
+        reward: { type: string, description: "Human readable, e.g. `$40 000 USD`." }
+        reward_type: { type: string, enum: [prize, points, knowledge] }
+        organization: { type: string }
+        open: { type: boolean }
+        start_time: { type: string, format: date-time }
+        end_time: { type: [string, "null"], format: date-time }
+        participations_count: { type: integer }
+        secret_code_required: { type: boolean }
+        is_participant: { type: boolean }
+      additionalProperties: true
+
+    CompetitionListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/CompetitionSummary" }
+        meta:
+          type: object
+          properties:
+            total_count: { type: integer }
+            open_count: { type: integer }
+            closed_count: { type: integer }
+            per_page: { type: integer }

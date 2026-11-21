@@ -1,0 +1,19 @@
+{
+  "data": {
+    "id": "team_lagos",
+    "title": "Lagos Learners",
+    "status": "ok",
+    "leader_username": "amina_dev",
+    "can_leave": false,
+    "users": [
+      {
+        "username": "amina_dev",
+        "countrycode": "sn"
+      }
+    ],
+    "invited_users": [],
+    "received_merge_requests": [],
+    "sent_merge_requests": [],
+    "transfers": []
+  }
+}

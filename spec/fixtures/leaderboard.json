@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "id": 501,
+      "public_rank": 1,
+      "private_rank": null,
+      "best_public_score": 0.4123,
+      "best_private_score": null,
+      "best_public_submitted_at": "2026-11-18T10:02:11.000Z",
+      "submission_count": 23,
+      "user": {
+        "username": "kofi_ml",
+        "countrycode": "gh"
+      }
+    },
+    {
+      "id": 502,
+      "public_rank": 2,
+      "private_rank": null,
+      "best_public_score": 0.4377,
+      "best_private_score": null,
+      "best_public_submitted_at": "2026-11-17T16:40:00.000Z",
+      "submission_count": 41,
+      "team": {
+        "id": "team_lagos",
+        "title": "Lagos Learners",
+        "countrycodes": [
+          "ng"
+        ],
+        "members": [
+          {
+            "username": "tolu_a",
+            "countrycode": "ng"
+          },
+          {
+            "username": "amina_dev",
+            "countrycode": "sn"
+          }
+        ]
+      }
+    },
+    {
+      "id": 503,
+      "public_rank": 3,
+      "private_rank": null,
+      "best_public_score": 0.4502,
+      "best_private_score": null,
+      "best_public_submitted_at": "2026-11-12T07:16:52.000Z",
+      "submission_count": 7,
+      "user": {
+        "username": "zawadi_k",
+        "countrycode": "ke"
+      }
+    },
+    {
+      "id": 504,
+      "public_rank": null,
+      "private_rank": null,
+      "best_public_score": null,
+      "best_private_score": null,
+      "best_public_submitted_at": null,
+      "submission_count": 0,
+      "user": {
+        "username": "newcomer",
+        "countrycode": "ci"
+      }
+    }
+  ],
+  "meta": {
+    "total_count": 4,
+    "per_page": 50,
+    "pages": 1,
+    "page": 0
+  }
+}

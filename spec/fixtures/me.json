@@ -1,0 +1,15 @@
+{
+  "data": {
+    "auth_token": null,
+    "user": {
+      "username": "amina_dev",
+      "first_name": "Amina",
+      "last_name": "Diallo",
+      "countrycode": "sn",
+      "country": "Senegal",
+      "points": 1250,
+      "rank": 812,
+      "created_at": "2023-04-02T09:12:44.000Z"
+    }
+  }
+}

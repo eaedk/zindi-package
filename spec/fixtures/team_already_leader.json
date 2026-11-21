@@ -1,0 +1,7 @@
+{
+  "data": {
+    "errors": {
+      "base": "Leader can only be the leader of one team"
+    }
+  }
+}
