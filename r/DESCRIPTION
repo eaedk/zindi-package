@@ -1,0 +1,35 @@
+Package: zindi
+Title: Client for the 'Zindi' Data Science Competition Platform
+Version: 1.0.0
+Authors@R: c(
+    person("Emmanuel", "Koupoh", email = "emmanuelkoupoh@gmail.com", role = c("aut", "cre")),
+    person("Muhamed", "Tuo", role = "aut"),
+    person("Cédric", "Manouan", role = "aut")
+  )
+Description: Compete on 'Zindi' <https://zindi.world> from R. Browse and
+    search competitions, join them, download their data, upload
+    submissions and wait for their scores, follow leaderboards, manage
+    teams and read discussions. Credentials are shared with the 'Python',
+    'JavaScript' and 'Rust' clients of the same project, so logging in once
+    is enough.
+License: MIT + file LICENSE
+URL: https://github.com/eaedk/zindi-package,
+    https://eaedk.github.io/zindi-package/
+BugReports: https://github.com/eaedk/zindi-package/issues
+Depends:
+    R (>= 4.1.0)
+Imports:
+    cli,
+    curl,
+    httr2 (>= 1.0.0),
+    jsonlite,
+    rlang,
+    utils
+Suggests:
+    askpass,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.1
